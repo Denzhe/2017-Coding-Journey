@@ -28,23 +28,39 @@ namespace AI_Learning_Game
 
         //Properties
 
-        public string Message
+        public void SetMessage(string nodeMessage)
         {
-            get => message;
-            set => message = value;
+            message = nodeMessage;
         }
 
-        public BTNode NoNode
+        public string GetMessage()
         {
-            get => noNode;
-            set => noNode = value;
+            return message;
         }
 
-        public BTNode YesNode
+        public void SetNoNode(BTNode node)
         {
-            get => yesNode;
-            set => yesNode = value;
+            noNode = node;
         }
+
+        public BTNode GetNoNode()
+        {
+            return noNode;
+        }
+
+
+        public void SetYesNode(BTNode node)
+        {
+            yesNode = node;
+        }
+
+        public BTNode GetYesNode()
+        {
+            return yesNode;
+        }
+
+
+
 
         public int PlayerWin
         {
@@ -85,8 +101,70 @@ namespace AI_Learning_Game
 
         public void Query()
         {
+            if (this.IsQuestion())
+            {
+                Console.WriteLine(this.message);
+
+                char input = GetYesOrNo();
+
+                if (input == 'y')
+                {
+                    yesNode.Query();
+                    playerWin++;
+                }
+                else
+                {
+                    noNode.Query();
+                    computerWin++;
+                }
+
+            }
+            else
+                this.OnQueryObject();
+        }
+
+        public void OnQueryObject()
+        {
+            Console.WriteLine("Are you thinking of a(n) " + this.message + "?");
+
+            char input = GetYesOrNo();
+            if (input == 'y')
+            {
+                Console.Write("The Computer Wins\n");
+            }
+            else
+            {
+                UpdateTree();
+            }
 
         }
 
+        private void UpdateTree()
+        {
+            Console.Write("You win! What was the correct answer?");
+            string userObject = Console.ReadLine();
+
+            Console.Write("Please enter a question to a(n) " + this.message + " from " + userObject + " : ");
+            string userQuestion = Console.ReadLine();
+
+            Console.Write("If you were thinking of a(n) " + userObject + ", what would the answer to that question be?");
+            char input = GetYesOrNo();
+            if (input == 'y')
+            {
+                this.noNode = new BTNode(this.message);
+                this.yesNode = new BTNode(userObject);
+            }
+
+            else
+            {
+                this.yesNode = new BTNode(this.message);
+                this.noNode = new BTNode(userObject);
+            }
+
+            Console.Write("Thanks you to I'm getting way smarter");
+            this.SetMessage(userQuestion);
+        }
+
+      
     }
 }
