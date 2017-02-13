@@ -82,7 +82,7 @@ namespace AI_Learning_Game
 
         private char GetYesOrNo()
         {
-            Console.WriteLine("\n Enter 'y' for yes and 'n' for no: ");
+            Console.Write("\n Enter 'y' for yes and 'n' for no: ");
 
             char inputChar = ' ';
 
@@ -92,7 +92,7 @@ namespace AI_Learning_Game
                 inputChar = char.ToLower(inputChar);
 
                 if (inputChar != 'y' && inputChar != 'n')
-                    Console.WriteLine("Incorrect input please enter again: ");
+                    Console.Write("Incorrect input please enter again: ");
             }
 
             return inputChar;
@@ -161,7 +161,7 @@ namespace AI_Learning_Game
                 this.noNode = new BTNode(userObject);
             }
 
-            Console.Write("Thanks you to I'm getting way smarter");
+            Console.Write("Thank s you to I'm getting way smarter");
             this.SetMessage(userQuestion);
         }
 
