@@ -1,6 +1,6 @@
 ﻿//  All code copyright (c) 2003 Barry Lapthorn
 //  Website:  http://www.lapthorn.net
-//
+// https://www.codeproject.com/Articles/3172/A-Simple-C-Genetic-Algorithm
 
 using System;
 using System.Collections;
@@ -126,6 +126,9 @@ namespace GenAlgorithm
             g_elitism = false;
         }
 
+        /// <summary>
+        /// Method that starts the GA execution
+        /// </summary>
         public void Go()
         {
             if (getFitness == null)
@@ -138,6 +141,7 @@ namespace GenAlgorithm
                 throw new IndexOutOfRangeException("Genome size not set");
             }
 
+            // Create the fitness table
             g_fitnessTable = new ArrayList();
             g_thisGeneration = new ArrayList();
             g_nextGeneration = new ArrayList();
@@ -154,8 +158,100 @@ namespace GenAlgorithm
             {
                 write = true;
                 outputFitness = new StreamWriter(g_strFitness);
+            }
+
+            for (int i = 0; i < g_generationSize; i++)
+            {
+                CreateNextGeneration();
+                RankPopulation();
+
+                if (write)
+                {
+                    if (outputFitness != null)
+                    {
+                        double d = (double)((Genome)g_thisGeneration[g_populationSize - 1]).Fitness;
+                        outputFitness.WriteLine($"{i},{d}");
+                    }
+                }
 
             }
+
+            if (outputFitness != null)
+            {
+                outputFitness.Close();
+            }
+        }
+
+        /// <summary>
+        /// After ranking all the genomes by fitness.This method allocates a high probablity
+        /// of selection to those highest fitness
+        /// </summary>
+        /// <returns>Random individual biased to highest fitness </returns>
+        private int RouletteSelection()
+        {
+            double randomFitness = g_Random.NextDouble() * g_totalFitness;
+
+            int index = -1;
+            int mid;
+            int first = 0;
+            int last = g_populationSize - 1;
+            mid = (last - first) / 2;
+
+
+            //Arraylist Binarysearch is for exact values only;
+
+
+            while (index == -1 && first <= last)
+            {
+                if (randomFitness < (double)g_fitnessTable[mid])
+                {
+                    last = mid;
+                }
+
+                else if(randomFitness > (double)g_fitnessTable[mid])
+                {
+                    first = mid;
+                }
+
+                mid = (first + last) / 2;
+                if ((last - first) == 1)
+                {
+                    index = last;
+                }
+            }
+
+            return index;
+        }
+
+        /// <summary>
+        /// Rank population and sort in order of fitness
+        /// </summary>
+        private void RankPopulation()
+        {
+            g_totalFitness = 0;
+            for (int i = 0; i < g_populationSize; i++)
+            {
+                Genome g = ((Genome)g_thisGeneration[i]);
+                g.Fitness = FitnessFunction(g.Genes());
+                g_totalFitness += g.Fitness;
+            }
+
+            g_thisGeneration.Sort(new GenomeComparer());
+
+            //  now sorted in order of fitness.
+
+            double fitness = 0.0;
+            g_fitnessTable.Clear();
+
+
+            for (int i = 0; i < g_populationSize; i++)
+            {
+                fitness += ((Genome)g_thisGeneration[i]).Fitness;
+                g_fitnessTable.Add((double)fitness);
+
+            }
+
+
         }
     }
 }
