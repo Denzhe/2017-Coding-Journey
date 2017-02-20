@@ -13,16 +13,6 @@ namespace OPP_GameCharacter_Prac_1
             Console.Title = "Press E to exit";
 
 
-            //Random random = new Random();
-            //for (int i = 0; i < 10; i++)
-            //{
-
-            //    Console.SetCursorPosition(0, 0);
-            //    Console.WriteLine(Console.LargestWindowHeight.ToString() + "\t" + Console.LargestWindowWidth.ToString());
-            //    Console.ReadLine();
-
-            //}
-
             List<GameCharacter> myGame = new List<GameCharacter>
             {
                 new HorizontalMover(0, 20, "#"),
