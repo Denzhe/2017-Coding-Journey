@@ -253,5 +253,14 @@ namespace GenAlgorithm
 
 
         }
+
+        private void CreateGenomes()
+        {
+            for (int i = 0; i < g_populationSize; i++)
+            {
+                Genome g = new Genome(g_genomeSize);
+                g_thisGeneration.Add(g);
+            }
+        }
     }
 }
