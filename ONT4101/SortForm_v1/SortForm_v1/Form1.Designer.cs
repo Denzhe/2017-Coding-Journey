@@ -117,10 +117,6 @@
             this.cmbSort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSort.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbSort.FormattingEnabled = true;
-            this.cmbSort.Items.AddRange(new object[] {
-            "Bubblesort",
-            "InsertionSort",
-            "SelectionSort"});
             this.cmbSort.Location = new System.Drawing.Point(6, 61);
             this.cmbSort.Name = "cmbSort";
             this.cmbSort.Size = new System.Drawing.Size(198, 21);

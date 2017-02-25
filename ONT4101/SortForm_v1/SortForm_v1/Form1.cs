@@ -14,6 +14,7 @@ namespace SortForm_v1
     public partial class frmSort : Form
     {
         List<String> myUnsortList = new List<String>();
+        List<Sorter> mySorter;
 
         public frmSort()
         {
@@ -23,12 +24,7 @@ namespace SortForm_v1
         private void btnDone_Click(object sender, EventArgs e)
         {
 
-            List<Sorter> mySorter = new List<Sorter>();
-
-            mySorter.Add(new BubbleSorter(myUnsortList.ToArray()));
-
-            mySorter.Add(new InsertionSorter(myUnsortList.ToArray()));
-            mySorter.Add(new SelectionSort(myUnsortList.ToArray()));
+            SortingMethod();
 
             string[] myNewaray = new string[mySorter.Count];
 
@@ -112,7 +108,27 @@ namespace SortForm_v1
         private void frmSort_Load(object sender, EventArgs e)
         {
 
+            SortingMethod();
+           
+
+            foreach (Sorter item in mySorter)
+            {
+                cmbSort.Items.Add(item.GetType().Name.ToString());
+                
+            }
+
             cmbSort.SelectedIndex = 0;
+        }
+
+        private void SortingMethod()
+        {
+            mySorter = new List<Sorter>();
+
+            mySorter.Add(new BubbleSorter(myUnsortList.ToArray()));
+
+            mySorter.Add(new InsertionSorter(myUnsortList.ToArray()));
+            mySorter.Add(new SelectionSort(myUnsortList.ToArray()));
+            mySorter.Add(new MergeSorter(myUnsortList.ToArray()));
 
         }
     }

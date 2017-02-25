@@ -8,7 +8,7 @@ namespace SortForm_v1
 {
     class MergeSorter : Sorter
     {
-        int[] Aux;
+        string[] Aux;
         public MergeSorter(string[] MyArray) : base(MyArray)
         {
         }
@@ -31,7 +31,31 @@ namespace SortForm_v1
         {
             this.watch.Start();
 
-            Aux = new int[MyArray.Length];
+            Aux = new string[MyArray.Length];
+            MergeSort(0, MyArray.Length - 1);
+
+        }
+
+        public void MergeSort(int left, int right)
+        {
+            if (left == right) return;
+            int middleIndex = (left + right) / 2;
+            MergeSort(left, middleIndex);
+            MergeSort(middleIndex + 1, right);
+            Merge(left, right);
+
+            for (int i = left; i <= right; i++)
+            {
+                MyArray[i] = Aux[i];
+            }
+            
+        }
+
+        private void Merge(int left,int right)
+        {
+            int middleIndex = (left + right) / 2;
+            int leftIndex = left;
+            int rightIndex = middleIndex + 1;
 
 
         }
