@@ -13,9 +13,9 @@ using System.Threading.Tasks;
 namespace GenAlgorithm
 {
 
-  public delegate double GAFunction(double[] values);
+    public delegate double GAFunction(double[] values);
 
-  public class GA
+    public class GA
     {
 
         private double g_mutationRate;
@@ -31,10 +31,11 @@ namespace GenAlgorithm
         private ArrayList g_nextGeneration;
         private ArrayList g_fitnessTable;
 
-        static Random g_Random = new Random();
+        static readonly Random g_Random = new Random();
+
         static private GAFunction getFitness;
 
-        public GAFunction GetFitness
+        public GAFunction FitnessFunction
         {
             get => getFitness;
             set => getFitness = value;
@@ -42,7 +43,7 @@ namespace GenAlgorithm
 
         public double G_MutationRate
         {
-            get => g_mutationRate; 
+            get => g_mutationRate;
             set => g_mutationRate = value;
         }
 
@@ -83,7 +84,7 @@ namespace GenAlgorithm
             set => g_strFitness = value;
         }
 
-        public bool G_elitism
+        public bool G_Elitism
         {
             //Keeps the fittest from the weakest
             get => g_elitism;
@@ -102,7 +103,7 @@ namespace GenAlgorithm
         }
 
 
-        public GA(double crossoverRate,double mutationRate,int populationSize,int generationSize,int genomeSize)
+        public GA(double crossoverRate, double mutationRate, int populationSize, int generationSize, int genomeSize)
         {
             g_mutationRate = mutationRate;
             g_crossoverRate = crossoverRate;
@@ -183,7 +184,7 @@ namespace GenAlgorithm
         }
 
         /// <summary>
-        /// After ranking all the genomes by fitness.This method allocates a high probablity
+        /// After ranking all the genomes by fitness.This method allocates a high probability
         /// of selection to those highest fitness
         /// </summary>
         /// <returns>Random individual biased to highest fitness </returns>
@@ -198,7 +199,7 @@ namespace GenAlgorithm
             mid = (last - first) / 2;
 
 
-            //Arraylist Binarysearch is for exact values only;
+            //Array list Binary search is for exact values only;
 
 
             while (index == -1 && first <= last)
@@ -208,7 +209,7 @@ namespace GenAlgorithm
                     last = mid;
                 }
 
-                else if(randomFitness > (double)g_fitnessTable[mid])
+                else if (randomFitness > (double)g_fitnessTable[mid])
                 {
                     first = mid;
                 }
@@ -261,6 +262,80 @@ namespace GenAlgorithm
                 Genome g = new Genome(g_genomeSize);
                 g_thisGeneration.Add(g);
             }
+        }
+
+        private void CreateNextGeneration()
+        {
+            g_nextGeneration.Clear();
+            Genome g = null;
+            if (g_elitism)
+                g = (Genome)g_thisGeneration[g_populationSize - 1];
+
+            for (int i = 0; i < g_populationSize; i += 2)
+            {
+                int pidx1 = RouletteSelection();
+                int pidx2 = RouletteSelection();
+
+                Genome parent1, parent2, child1, child2;
+                parent1 = ((Genome)g_thisGeneration[pidx1]);
+                parent2 = ((Genome)g_thisGeneration[pidx2]);
+
+                if (g_Random.NextDouble() < g_mutationRate)
+                {
+                    parent1.Crossover(ref parent2, out child1, out child2);
+                }
+                else
+                {
+                    child1 = parent1;
+                    child2 = parent2;
+
+                }
+
+
+                child1.Mutate();
+                child2.Mutate();
+
+                g_nextGeneration.Add(child1);
+                g_nextGeneration.Add(child2);
+
+
+            }
+            if (g_elitism && g != null)
+                g_nextGeneration[0] = g;
+
+            g_thisGeneration.Clear();
+
+            for (int i = 0; i < g_populationSize; i++)
+            {
+                g_thisGeneration.Add(g_nextGeneration[i]);
+            }
+
+        }
+
+
+        public void GetBest(out double[] values, out double fitness)
+        {
+            Genome g = ((Genome)g_thisGeneration[g_populationSize - 1]);
+            values = new double[g.Length];
+            g.GetValues(ref values);
+            fitness = (double)g.Fitness;
+        }
+
+        public void GetWorst(out double[] values, out double fitness)
+
+        {
+            GetNthGenome(0, out values, out fitness);
+        }
+
+        public void GetNthGenome(int n, out double[] values, out double fitness)
+        {
+            if (n < 0 || n > g_populationSize - 1)
+                throw new ArgumentOutOfRangeException("n too large,or too small");
+            Genome g = ((Genome)g_thisGeneration[n]);
+            values = new double[g.Length];
+            g.GetValues(ref values);
+            fitness = (double)g.Fitness;
+            
         }
     }
 }

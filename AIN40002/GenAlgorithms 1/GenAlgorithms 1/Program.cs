@@ -8,20 +8,25 @@ namespace GenAlgorithms_1
 {
     class Program
     {
+        public static double calcFit(double values)
+        {
+            double f1;
+
+            return f1 = values;
+            
+        }
+
         static void Main(string[] args)
         {
 
-            Genome Mother, Father;
-            Mother = new Genome();
-            Father = new Genome();
+            GA ga = new GA();
+            ga.FitnessFunction = new GAFunction(calcFit);
+            ga.FitFile = @"F:\fitness.csv"; ;
+            ga.writeLog();
 
-            SinglePointCrossOver(Mother, Father);
-
+            Console.WriteLine("It worked");
         }
 
-        private static void SinglePointCrossOver(Genome mother, Genome father)
-        {
-            throw new NotImplementedException();
-        }
+     
     }
 }
