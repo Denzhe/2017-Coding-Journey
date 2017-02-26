@@ -49,6 +49,9 @@ namespace SortForm_v1
                 }
             } while (swapped == true);
 
+            this.watch.Stop();
+
+
         }
     }
 }

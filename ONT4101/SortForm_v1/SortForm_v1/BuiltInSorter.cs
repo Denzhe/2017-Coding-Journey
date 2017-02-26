@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace SortForm_v1
 {
-    class SelectionSort : Sorter
+    class BuiltInSorter : Sorter
     {
-
-        public SelectionSort(string[] MyArray) : base(MyArray)
+        public BuiltInSorter(string[] MyArray) : base(MyArray)
         {
-
 
         }
 
@@ -27,29 +25,13 @@ namespace SortForm_v1
             return newArray;
         }
 
-
         public override void Sort()
         {
             this.watch.Start();
 
+            Array.Sort(MyArray);
 
-            for (int i = 0; i < MyArray.Length -1; i++)
-            {
-                int maxIndex = i;
-                for (int j = 0; j < MyArray.Length; j++)
-                {
-                    if (string.Compare(MyArray[j], MyArray[maxIndex]) >= 0)
-                    {
-                        maxIndex = j;
-                    }
-                        
-                }
-
-                Swap(i, maxIndex);
-            }
             this.watch.Stop();
-
         }
-
     }
 }

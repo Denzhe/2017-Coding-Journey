@@ -47,6 +47,8 @@ namespace SortForm_v1
                 MyArray[j] = temp;
 
             }
+            this.watch.Stop();
+
         }
     }
 }

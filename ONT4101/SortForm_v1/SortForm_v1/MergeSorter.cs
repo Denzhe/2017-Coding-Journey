@@ -33,7 +33,7 @@ namespace SortForm_v1
 
             Aux = new string[MyArray.Length];
             MergeSort(0, MyArray.Length - 1);
-
+            this.watch.Stop();
         }
 
         public void MergeSort(int left, int right)
@@ -56,8 +56,33 @@ namespace SortForm_v1
             int middleIndex = (left + right) / 2;
             int leftIndex = left;
             int rightIndex = middleIndex + 1;
+            int auxIndex = left;
+            while (leftIndex <= middleIndex && rightIndex <= right)
+            {
+                if (string.Compare(MyArray[leftIndex], MyArray[rightIndex],true)> 0)
+                {
+                    Aux[auxIndex] = MyArray[leftIndex++];
 
+                }
+                else
+                {
+                    Aux[auxIndex] = MyArray[rightIndex++];
+                }
+                auxIndex++;
+            }
+            while (leftIndex <= middleIndex)
+            {
+                Aux[auxIndex] = MyArray[leftIndex++];
+                auxIndex++;
+            }
 
+            while (rightIndex <= right)
+            {
+                Aux[auxIndex] = MyArray[rightIndex++];
+                auxIndex++;
+            }
         }
+
+
     }
 }
