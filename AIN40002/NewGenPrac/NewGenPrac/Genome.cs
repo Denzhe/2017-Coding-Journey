@@ -9,10 +9,15 @@ namespace NewGenPrac
     class Genome
     {
         int [] DNA {get;set;}
-        int DNA_Length = 20;
+        int DNA_Length = 23;
         double CrossOverRate = 0.7;
         public double Fitness = 0;
         static readonly  Random seed = new Random();
+        double mutationRate = 0.05;//Chance that a specified child will be mutated
+        const int populationSize = 100;
+        public Genome[] Population;
+
+        static char[] encoding = "0123456789+-*/".ToCharArray();
 
 
         public Genome(bool  generate)
@@ -22,10 +27,16 @@ namespace NewGenPrac
             {
                 for (int i = 0; i <= DNA_Length - 1; i++)
                 {
-                    DNA[i] = seed.Next(0,2);
+                    DNA[i] = seed.Next(0,27);
                 }
             }
-
+            else
+            {
+                for (int i = 0; i <= DNA_Length - 1; i++)
+                {
+                    DNA[i] = 0;
+                }
+            }
            
         }
 
@@ -36,7 +47,44 @@ namespace NewGenPrac
         }
 
 
+        public void Decode(string [] genes )
+        {
+            bool number = false;
+            string geneLetter = "";
 
+            foreach (string item in genes)
+            {
+                geneLetter += test(Convert.ToByte(item, 2), ref number);
+            }
+
+            Console.Write(geneLetter);
+        }
+
+        private string test(byte v, ref bool number)
+        {
+            if (v < encoding.Length)
+            {
+                if ((number && !(number = v < 10)) || !number && (number = v < 10))
+                {
+                    return encoding[v].ToString();
+
+                }
+            }
+
+            return "";
+        }
+
+        public void Mutation(Genome parent)
+        {
+            for (int i = 0; i <= DNA_Length - 1; i++)
+            {
+                if (mutationRate > DNA[i] )
+                {
+                    DNA[i] = seed.Next(0, 27);
+
+                }
+            }
+        }
         public void SinglePointCrossOver(Genome parent1,Genome parent2,Genome child1,Genome child2)
         {
            

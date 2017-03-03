@@ -13,6 +13,10 @@ namespace NewGenPrac
             Console.Write("Please enter the number of iterations: ");
             int numIterations = int.Parse(Console.ReadLine());
             Genome g = new Genome(false);
+            string[] letter = new string[23];
+
+            letter[0] = "THIS IS A TEST SENTENCE";
+
             Logger.Write("Execute time: " + DateTime.Now.ToShortDateString());
 
             for (int i = 0; i <= numIterations ; i++)
@@ -25,7 +29,8 @@ namespace NewGenPrac
                 Console.ResetColor();
                 g.TwoPointCrossOver(new Genome(true), new Genome(true), new Genome(false), new Genome(false));
                 Write("__________________________________________________");
-               
+
+                g.Decode(g)
             }
 
             Console.ReadLine();
