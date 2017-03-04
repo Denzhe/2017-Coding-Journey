@@ -47,17 +47,16 @@ namespace NewGenPrac
         }
 
 
-        public void Decode(string [] genes )
+        public void Decode(Genome parent1)
         {
-            bool number = false;
-            string geneLetter = "";
-
-            foreach (string item in genes)
+            string s = "";
+            for (int i = 0; i <= DNA_Length - 1; i++)
             {
-                geneLetter += test(Convert.ToByte(item, 2), ref number);
+                char c = Convert.ToChar(parent1.DNA[i]);
+                s +=  c.ToString();
             }
-
-            Console.Write(geneLetter);
+           
+            Console.Write(s);
         }
 
         private string test(byte v, ref bool number)
