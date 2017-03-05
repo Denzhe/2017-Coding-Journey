@@ -24,8 +24,11 @@ namespace NewGenPrac
                 Write("SinglePointCrossover");
                 g.SinglePointCrossOver(new Genome(true),new Genome(true),new Genome(false),new Genome(false));
                 Write(" ");
-                g.Decode(new [] { "ds","dsd","dsd"});
+              //  g.Decode(new Genome(true));
+               // g.Decode(new Genome(new [] { 84, 72, 73, 83, 32, 73, 83, 32, 65, 32, 84, 69, 83, 84, 32, 83, 69, 78, 84, 69, 78, 67, 69, }));
+              //  g.FitnessFun("THIS IS A TEST SENTENCE");
 
+               g.CalculateFitness();
                 Console.ForegroundColor = ConsoleColor.Red;
                 Write("TwoPointCrossover");
                 Console.ResetColor();

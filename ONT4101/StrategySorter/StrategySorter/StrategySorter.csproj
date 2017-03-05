@@ -42,12 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BubbleOut.cs" />
-    <Compile Include="BubbleSorterDisplayHorizontal.cs" />
-    <Compile Include="Bubble_Sort.cs" />
-    <Compile Include="IOutput.cs" />
-    <Compile Include="ISort.cs" />
-    <Compile Include="Sorter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

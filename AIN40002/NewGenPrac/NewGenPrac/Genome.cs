@@ -12,6 +12,8 @@ namespace NewGenPrac
         int DNA_Length = 23;
         double CrossOverRate = 0.7;
         public double Fitness = 0;
+        public double PopTotalFitess = 0;
+        public double BestGenome = 0;
         static readonly  Random seed = new Random();
         double mutationRate = 0.05;//Chance that a specified child will be mutated
         const int populationSize = 100;
@@ -46,33 +48,145 @@ namespace NewGenPrac
             DNA = myDNA;
         }
 
-
-
-        public void Decode(string [] genes)
+        public void NextGeneration()
         {
-            string collect = "";
 
-            foreach (string item in genes)
-            {
-
-                collect += item;
-            }
-            Console.Write(collect);
         }
-
-        private string test(byte v, ref bool number)
+        public Genome RouletteWheelSelection(List<Genome> Pop, double totalFitness)
         {
-            if (v < encoding.Length)
-            {
-                if ((number && !(number = v < 10)) || !number && (number = v < 10))
-                {
-                    return encoding[v].ToString();
 
+            Random newSeed = new Random();
+            double luckyNumer = newSeed.NextDouble() * totalFitness;
+
+            Genome theOne = null;
+
+            foreach (Genome item in Pop)
+            {
+                luckyNumer -= Fitness;
+
+                if (luckyNumer <= 0 )
+                {
+                    theOne = item;
                 }
             }
 
-            return "";
+
+            return theOne;
         }
+
+        public void CalculateFitness()
+        {
+            PopTotalFitess = 0;
+           
+            Genome g = new Genome(true);
+
+
+            for (int i = 0; i < DNA_Length; i++)
+            {
+              
+
+                Fitness = FitnessFun("THAP IS A TEST SENTECCE");
+
+
+                if (Fitness > BestGenome)
+                {
+                    BestGenome = Fitness;
+                }
+
+
+
+                PopTotalFitess += BestGenome;
+                BestGenome = 0;
+
+
+            }
+          
+
+            Console.Write(PopTotalFitess);
+
+
+        }
+
+
+
+
+
+
+
+
+
+        public  double FitnessFun(string target)
+        {
+            double fit = 0;
+            Genome g = new Genome(true);
+
+
+            int targetValue = 0;
+
+            int dnaValue = 0;
+
+            for (int i = 0; i < target.Length; i++)
+            {
+              
+
+                char a = target[i];
+
+                dnaValue += g.DNA[i];
+
+                targetValue += Convert.ToInt32(a);
+
+            }
+
+            double distance = Math.Abs(targetValue) - dnaValue;
+            fit = 1 / distance + 0.01 ;
+           
+         
+            return fit;
+        }
+
+        public void Decode(Genome genes)
+        {
+
+
+
+            string[] letter = { " ","A","B","C","D","E","F","G","H","I","J","K",
+                "L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
+
+
+            string s = "";
+
+            char c = ' ';
+
+            for (int i = 0; i < DNA_Length; i++)
+            {
+                c = Convert.ToChar(genes.DNA[i]);
+
+                for (int r = 0; r < letter.Length; r++)
+                {
+                    if (letter[r].Contains(c))
+                    {
+                        s += letter[r];
+                    }
+                }
+
+            }
+
+            Console.Write(s);
+            Console.WriteLine();
+
+
+            //string s = "";
+
+            //for (int i = 0; i < DNA_Length; i++)
+            //{
+            //    s += letter[genes.DNA[i]];
+            //}
+
+            //Console.Write(s);
+
+
+        }
+
 
         public void Mutation(Genome parent)
         {
