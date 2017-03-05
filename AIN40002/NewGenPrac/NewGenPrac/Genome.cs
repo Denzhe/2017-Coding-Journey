@@ -47,16 +47,17 @@ namespace NewGenPrac
         }
 
 
-        public void Decode(Genome parent1)
+
+        public void Decode(string [] genes)
         {
-            string s = "";
-            for (int i = 0; i <= DNA_Length - 1; i++)
+            string collect = "";
+
+            foreach (string item in genes)
             {
-                char c = Convert.ToChar(parent1.DNA[i]);
-                s +=  c.ToString();
+
+                collect += item;
             }
-           
-            Console.Write(s);
+            Console.Write(collect);
         }
 
         private string test(byte v, ref bool number)
@@ -79,11 +80,13 @@ namespace NewGenPrac
             {
                 if (mutationRate > DNA[i] )
                 {
-                    DNA[i] = seed.Next(0, 27);
+                    parent.DNA[i] = seed.Next(0, 27);
 
                 }
             }
         }
+
+
         public void SinglePointCrossOver(Genome parent1,Genome parent2,Genome child1,Genome child2)
         {
            
