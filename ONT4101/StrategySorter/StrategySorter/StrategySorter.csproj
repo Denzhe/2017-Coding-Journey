@@ -42,8 +42,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client\MergeSorterDisplayHorizontal.cs" />
+    <Compile Include="Client\myUltimateSorter.cs" />
+    <Compile Include="DisplayBehav\DisplayHorizontal.cs" />
+    <Compile Include="DisplayBehav\DisplayVerticle.cs" />
+    <Compile Include="Sort_Algo\BubbleSort.cs" />
+    <Compile Include="Client\BubbleSorterDisplayHorizontal.cs" />
+    <Compile Include="Interfaces\IDisplay.cs" />
+    <Compile Include="Client\InsertionSorterDisplayVertical.cs" />
+    <Compile Include="Sort_Algo\InsertionSort.cs" />
+    <Compile Include="Interfaces\ISort.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Client\Sorter.cs" />
+    <Compile Include="Sort_Algo\MergeSort.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
