@@ -1,0 +1,7 @@
+A large portion of this prac is Ryno Adlams code but re typed by me
+I did design the prac with the exception of question 5
+I got confused on the actual wording.
+I still don't know what the prac is supposed to achieve, is it simply decoding the users word by searching it
+dictionary
+
+Anyway credit goes to Ryno he helped clear some question and created more
