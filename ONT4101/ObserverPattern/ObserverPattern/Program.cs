@@ -16,7 +16,9 @@ namespace ObserverPattern
 
             List<IObserver> mySubs = new List<IObserver>
             {
+              new Observer(TheSubject),
               new Observer(TheSubject)
+             
             };
 
             ConsoleKeyInfo myKey;
@@ -33,7 +35,10 @@ namespace ObserverPattern
 
                 foreach (IObserver current in mySubs)
                 {
+                    Console.WriteLine("Unique ID: "+current.GetHashCode().ToString().Substring(0,4) + " ");
                     TheSubject.callMethod();
+                   
+                    Console.WriteLine();
                 }
 
                 Console.WriteLine();
