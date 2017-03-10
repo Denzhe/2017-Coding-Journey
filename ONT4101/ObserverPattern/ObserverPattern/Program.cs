@@ -12,7 +12,7 @@ namespace ObserverPattern
         {
             Subject TheSubject = new Subject();
 
-            Generator g = new Generator();
+        
 
             List<IObserver> mySubs = new List<IObserver>
             {
@@ -33,7 +33,7 @@ namespace ObserverPattern
 
                 foreach (IObserver current in mySubs)
                 {
-                    TheSubject.callMethod(g.getRandom());
+                    TheSubject.callMethod();
                 }
 
                 Console.WriteLine();

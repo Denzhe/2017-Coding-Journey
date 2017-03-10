@@ -10,8 +10,7 @@ namespace ObserverPattern
     {
         List<IObserver> Observer = new List<IObserver>();
 
-        Sum sum = new Sum();
-        Date date = new Date();
+       
         public void Attach(IObserver Target)
         {
             Observer.Add(Target);
@@ -32,8 +31,11 @@ namespace ObserverPattern
         }
 
       
-        public void callMethod(int r)
+        public void callMethod()
         {
+            Sum sum = new Sum();
+            Date date = new Date();
+
             Console.WriteLine("Sum: " + sum.setSum());
             Console.WriteLine("Date: " + date.setDate());
             Notify();
