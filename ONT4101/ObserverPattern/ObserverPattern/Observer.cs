@@ -18,8 +18,7 @@ namespace ObserverPattern
 
         public void Update()
         {
-            Console.WriteLine("Sum: " + ((Subject)this.TheSubject).getSum());
-            Console.WriteLine("Date: " + ((Subject)this.TheSubject).getDate());
+           
 
         }
     }

@@ -11,7 +11,9 @@ namespace ObserverPattern
         static void Main(string[] args)
         {
             Subject TheSubject = new Subject();
+
             Generator g = new Generator();
+
             List<IObserver> mySubs = new List<IObserver>
             {
               new Observer(TheSubject)

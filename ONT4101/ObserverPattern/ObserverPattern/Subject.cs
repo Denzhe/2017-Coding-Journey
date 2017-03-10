@@ -9,10 +9,9 @@ namespace ObserverPattern
     class Subject : ISubject
     {
         List<IObserver> Observer = new List<IObserver>();
-        int sum = 0;
-        DateTime myDate = DateTime.Now;
- 
-        
+
+        Sum sum = new Sum();
+        Date date = new Date();
         public void Attach(IObserver Target)
         {
             Observer.Add(Target);
@@ -32,35 +31,14 @@ namespace ObserverPattern
             }
         }
 
-        public void setSum(int r)
-        {
-            this.sum += r;
-           
-        }
-
-        public int getSum()
-        {
-            return this.sum;
-        }
-
-        public void setDate(int r)
-        {
-            myDate = myDate.AddDays(r);
-          
-           
-        }
-
-
+      
         public void callMethod(int r)
         {
-            setSum(r);
-            setDate(r);
+            Console.WriteLine("Sum: " + sum.setSum());
+            Console.WriteLine("Date: " + date.setDate());
             Notify();
         }
 
-        public DateTime getDate()
-        {
-            return this.myDate;
-        }
+      
     }
 }
