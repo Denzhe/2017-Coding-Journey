@@ -18,7 +18,7 @@ namespace observer_pattern
 
             IObserver thirdSubscriber = new Observer(gen);
             thirdSubscriber.update();
-            Console.ReadLine();
+  
 
 
             ConsoleKeyInfo key;
