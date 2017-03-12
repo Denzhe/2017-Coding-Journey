@@ -1,0 +1,6 @@
+c:\users\denzhe sadiki\documents\visual studio 2015\Projects\observer pattern\observer pattern\bin\Debug\observer pattern.exe.config
+c:\users\denzhe sadiki\documents\visual studio 2015\Projects\observer pattern\observer pattern\bin\Debug\observer pattern.exe
+c:\users\denzhe sadiki\documents\visual studio 2015\Projects\observer pattern\observer pattern\bin\Debug\observer pattern.pdb
+c:\users\denzhe sadiki\documents\visual studio 2015\Projects\observer pattern\observer pattern\obj\Debug\observer pattern.csprojResolveAssemblyReference.cache
+c:\users\denzhe sadiki\documents\visual studio 2015\Projects\observer pattern\observer pattern\obj\Debug\observer pattern.exe
+c:\users\denzhe sadiki\documents\visual studio 2015\Projects\observer pattern\observer pattern\obj\Debug\observer pattern.pdb
